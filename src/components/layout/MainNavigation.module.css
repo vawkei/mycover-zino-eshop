@@ -1,0 +1,370 @@
+.header{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 8rem;
+    background-color: rgb(43, 40, 40);
+    padding: 0 10%;
+    color: white;
+    position: relative;
+}
+.logo h2{
+    color: white;
+}
+.logo span{
+    color: red;
+}
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+ul{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+a{
+    color: white;
+    margin: 0 1rem;
+}
+.right-nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 8rem;
+}
+.cart a{
+    display: flex;
+    align-items: center;
+}
+.cart p{
+    color: white;
+}
+
+.mobile-logo{
+    display: none;
+}
+.menu-icon{
+    display: none;
+}
+
+@media  screen and  (max-width:769px){
+    nav{
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 50%;
+        height: 100vh;
+        background-color: brown;
+        padding: 1rem;
+        transform: translateX(-200%);
+        transition: all 0.2s;
+        z-index: 10;
+    }
+    .nav-backdrop{
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100vh;
+        transition: all 0.2s;
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+    .show-nav-backdrop{
+        transform: translateX(100%);
+    }
+    ul{
+        display: block;
+        margin-bottom: -2.5rem;
+    }
+    li{
+        display: block;
+    }
+    .right-nav{
+        display: block;
+        margin: 0;
+        padding: 1rem 0;
+    }
+    .links{
+        display: block;
+        padding:1rem 0;
+    }
+    a{
+        display: block;
+        margin: 0;
+        padding: 1.5rem 0;
+    }
+    .menu-icon{
+        display: block;
+        position: relative;
+    }
+    .spacer{
+        padding-left: 10rem;
+    }
+    .toggle{
+        position: absolute;
+        right: -3rem;
+        top: 1.8rem;
+    }
+    .mobile-logo{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .show-navigation{
+        transform: translateX(0);
+    }
+    .hide-navigation{
+        transform: translateX(-200%);
+    }
+}
+
+/* STARTSHERE: Ewomazino's Code from His GitHub
+@media screen and (max-width:769px){
+    nav{
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 50%;
+        height: 100vh;
+        background-color: darkblue;
+        padding: 1rem;
+        z-index: 10;
+        transform:translateX(-200%);
+        transition: all 0.3s;
+    }
+    .nav-wrapper{
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.7);
+        transform: translateX();
+        transition: all 0.3s;
+    }
+    .show-nav-wrapper{
+        transform: translateX(100%);
+    }
+    ul{
+        display: block;
+    }
+    .logo-nobile{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    li{
+        padding: 5px 0;
+        border-bottom: 1px solid #333;
+    }
+    a{
+        display: block;
+    }
+    .header-right{
+        display: block;
+    }
+    .links{
+        display: block;
+    }
+    a{
+        display: block;
+        margin: 0;
+        padding: 5px 0;
+    }
+    .cart{
+        display: block;
+        padding: 5px 0;
+    }
+    .cart a{
+        position: relative;
+    }
+    .cart p{
+        position: absolute;
+        top: -1rem;
+        left: 5rem;
+    }
+    .show-nav{
+        transform: translateX(0);
+    }
+    .hide-nav{
+        transform: translateX(-200%);
+    }
+    .menu-icon{
+        display: flex;
+    }
+}
+*ENDSHERE/
+
+
+/* header{
+    width: 100%;
+}
+.header{
+    background-color: rgb(43, 40, 40);
+    color: white;
+    padding: 0 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 8rem;
+    position: relative;
+}
+.logo h2{
+    color: white;
+}
+.logo span{
+    color: red;
+}
+
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+nav ul{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+ul li{
+    margin: 0 1rem;
+}
+.right-nav{
+    display: flex;
+    align-items: center;
+}
+.right-nav a{
+    margin: 0 1rem;
+}
+a{
+    color: white;
+}
+
+.cart{
+    display: flex;
+    position: relative;
+}
+.cart a{
+margin-top: -1.8rem;
+}
+.cart p{
+    color: white;
+    position: absolute;
+    top: -1rem;
+    right: 0.12rem;
+}
+
+.mobile-logo{
+    display: none;
+}
+
+.mobile-menu-icon{
+    display: none;
+} */
+
+
+/* @media screen and (max-width:768px){
+    .mobile-logo{
+        display: block;
+        padding: 1rem 0;
+    } 
+    nav{
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 50%;
+        height: 100vh;
+        background-color: darkblue;
+        padding: 1rem;
+        transform: translateX(-200%);
+        transition: all 0.2s;
+        z-index: 10;
+    }
+    .showBackground{
+        position:absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100vh;
+        transform: translateX();
+        transition: all 0.1s;
+        background-color: rgba(0, 0, 0, 0.7);
+    }  
+    .showBackgroundTransform{
+        transform: translate(100%);
+    }
+    ul{
+        display: block;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .mobile-logo{
+        display: block;
+        justify-content: space-between;
+        align-items: center;
+    }
+    li{
+        padding: 5px 0;
+        border-bottom: 1px solid #333;
+    }
+    .right-nav{
+        display: block;
+    }
+    a{
+        display: block;
+        margin: 0;
+        padding: 5px 0;
+        border-bottom: 1px solid #333;
+    }
+    .showSideNavigation{
+        transform:translateX(0) ;
+    }
+    .hideSideNavigation{
+        transform: translate(-250px);
+    }
+    .mobile-menu-icon{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+
+    }
+    .cart{
+        display: block;
+        right: 4.5rem;
+        padding: 5px 0;
+    }
+    .cart a{
+        position: relative;
+    }
+    .cart p{
+        position: absolute;
+        top: -1rem;
+        right: -1rem;
+    }
+    .cart span{
+        font-size: 2rem;
+    }
+     .toggle{
+        position: absolute;
+        top: -1rem;
+        right: -1.8rem;
+    }
+    
+    
+} */
