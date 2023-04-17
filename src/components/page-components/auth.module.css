@@ -33,12 +33,12 @@ form .control input{
     border: 1px solid #ccc;
     padding: 1rem;
 }
-/* 15e8a15fa555722bb903585afa093ae053cbe756 */
+
 .googleLogin{
     margin-top: 1rem;
 }
 .googleLoginButton{
-    background-color: orangered;
+    color: yellow;
 } 
 .register{
     text-align: center;
