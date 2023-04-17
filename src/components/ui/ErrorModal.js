@@ -1,7 +1,7 @@
 const ErrorModal = (props) => {
     return ( 
         <div>
-            <h1 style={{color:'red'}}>{props.error}</h1>
+            <p style={{color:'red'}}>{props.error}</p>
         </div>
      );
 }

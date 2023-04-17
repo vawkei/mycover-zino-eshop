@@ -53,6 +53,9 @@ a{
 .menu-icon{
     display: none;
 }
+.active{
+border-bottom: 1px solid orangered;
+}
 
 @media  screen and  (max-width:769px){
     nav{

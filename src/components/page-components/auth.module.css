@@ -1,0 +1,60 @@
+section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5rem;
+}
+
+.title{
+    text-align: center;
+}
+.card{
+    width: 30%;
+    height: 30%;
+    margin-right: 3rem;
+}
+.image{
+    width: 25%;
+    height: 45%;
+    overflow: hidden;
+}
+.image img{
+    width: 100%;
+    height: 100%;
+}
+form{
+    padding: 1rem;
+}
+
+form .control input{
+    width: 100%;
+    margin-bottom: 1rem;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    padding: 1rem;
+}
+/* 15e8a15fa555722bb903585afa093ae053cbe756 */
+.googleLogin{
+    margin-top: 1rem;
+}
+.googleLoginButton{
+    background-color: orangered;
+} 
+.register{
+    text-align: center;
+}
+.toRegister{
+    display: flex;
+    justify-content: center;
+}
+.toRegister a p:hover{
+    color: red;
+}
+
+.toLogin{
+    display: flex;
+    justify-content: center;
+}
+.toLogin a p:hover{
+    color: red;
+}

@@ -1,10 +1,11 @@
 import classes from "./auth.module.css";
 import registerImage from "../../asset/eshopregister.png";
 import Card from "../ui/Card";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import ErrorModal from "../ui/ErrorModal";
 import Button from "../ui/Button";
-import Loading from '../ui/Loading';
+import Loading from "../ui/Loading";
+import { Link } from "react-router-dom";
 // import { ToastContainer, toast } from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
 
@@ -15,6 +16,20 @@ const Register = () => {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const conPasswordInputRef = useRef();
+
+  let timeInterval = 2000;
+  let errorClearer = "";
+
+  useEffect(() => {
+    if (errorInfo) {
+      setTimeout(function () {
+        errorClearer = setErrorInfo("");
+      }, timeInterval);
+      return () => {
+        clearTimeout(errorClearer);
+      };
+    }
+  }, [errorInfo, errorClearer]);
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
@@ -27,6 +42,7 @@ const Register = () => {
 
     if (enteredPassword !== enteredConPassword) {
       setErrorInfo("Passwwords Don't Match");
+      setIsLoading(false);
       return;
     }
     if (
@@ -39,6 +55,7 @@ const Register = () => {
       enteredConPassword.trim() === ""
     ) {
       setErrorInfo("Invalid Inputs,Check your Inputs");
+      setIsLoading(false);
       return;
     }
     console.log({ enteredEmail, enteredPassword, enteredConPassword });
@@ -46,13 +63,18 @@ const Register = () => {
   };
 
   return (
-    <div>
-        {isLoading && <Loading />}
-      <Card>
+    <section>
+      {isLoading && <Loading />}
+      <Card className={classes.card}>
         <form action="" onSubmit={onSubmitHandler}>
+          <div className={classes.title}>
+            <h3>Register</h3>
+          </div>
+
           <div className={classes.control}>
             <input type="email" placeholder="Enter Email" ref={emailInputRef} />
           </div>
+
           <div className={classes.control}>
             <input
               type="password"
@@ -60,6 +82,7 @@ const Register = () => {
               ref={passwordInputRef}
             />
           </div>
+
           <div className={classes.control}>
             <input
               type="password"
@@ -67,9 +90,16 @@ const Register = () => {
               ref={conPasswordInputRef}
             />
           </div>
+
           <div className={classes.action}>
             <Button>Register</Button>
           </div>
+          <span className={classes.toLogin}>
+            <p>Already have an account ?</p>
+            <Link to={"/login"}>
+              <p>Login </p>
+            </Link>
+          </span>
         </form>
         {errorInfo && <ErrorModal error={errorInfo} />}
       </Card>
@@ -77,7 +107,7 @@ const Register = () => {
       <div className={classes.image}>
         <img src={registerImage} alt="reg-img" />
       </div>
-    </div>
+    </section>
   );
 };
 
