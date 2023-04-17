@@ -7,7 +7,14 @@ import { useState } from "react";
 import Loading from "../ui/Loading";
 import { Link } from "react-router-dom";
 import React from "react";
-import {AiOutlineGoogle} from 'react-icons/ai'
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+
+import { auth } from "../../firebase/Config";
+import { AiOutlineGoogle } from "react-icons/ai";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -21,6 +28,24 @@ const Login = () => {
   };
   const passwordChangeHandler = (e) => {
     setEnteredPassword(e.target.value);
+  };
+
+
+const provider = new GoogleAuthProvider();  
+
+const onSignInGoogleHandler = (e) => {
+  e.preventDefault()
+  signInWithPopup(auth, provider)
+  .then((result) => {
+    // The signed-in user info.
+    const user = result.user;
+    toast.success('Login with Google Successfull')
+    console.log(user);
+  }).catch((error) => {
+    // Handle Errors here.
+    const errorMessage = error.message;
+    toast.error(errorMessage)
+  });
   };
 
   const onSubmitHandler = (e) => {
@@ -38,18 +63,30 @@ const Login = () => {
       setIsLoading(false);
       return;
     }
-    console.log(enteredEmail, enteredPassword);
-    toast("common y all");
-    setIsLoading(false);
+    //console.log(enteredEmail, enteredPassword);
+    signInWithEmailAndPassword(auth, enteredEmail, enteredPassword)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+        toast("Log in Successfull");
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        toast.error(errorMessage);
+        setIsLoading(false);
+      });
   };
 
   return (
     <section>
+      {isLoading && <Loading />}
+      <ToastContainer />
       <div className={classes.image}>
         <img src={registerImage} alt="reg-img" />
       </div>
 
-      {isLoading && <Loading />}
       <Card className={classes.card}>
         <form action="" onSubmit={onSubmitHandler}>
           <div className={classes.title}>
@@ -80,8 +117,8 @@ const Login = () => {
           <p>Reset Password</p>
           <p>--or--</p>
           <div className={classes.googleLogin}>
-            <Button className={classes.googleLoginButton}>
-            <AiOutlineGoogle style={{color:'red'}} /> Login with Google
+            <Button className={classes.googleLoginButton} onClick={onSignInGoogleHandler} >
+              <AiOutlineGoogle style={{ color: "red" }} /> Login with Google
             </Button>
           </div>
         </form>

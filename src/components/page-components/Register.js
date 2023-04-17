@@ -6,12 +6,17 @@ import ErrorModal from "../ui/ErrorModal";
 import Button from "../ui/Button";
 import Loading from "../ui/Loading";
 import { Link } from "react-router-dom";
-// import { ToastContainer, toast } from 'react-toastify';
+import { createUserWithEmailAndPassword } from "firebase/auth";
+// import {toast, ToastContainer} from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
+import {auth} from '../../firebase/Config'
+import AuthModal from "../ui/AuthModal";
 
 const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorInfo, setErrorInfo] = useState(null);
+  const [authInfo, setAuthInfo] = useState(null);
+
 
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
@@ -41,7 +46,7 @@ const Register = () => {
     const enteredConPassword = conPasswordInputRef.current.value;
 
     if (enteredPassword !== enteredConPassword) {
-      setErrorInfo("Passwwords Don't Match");
+      setErrorInfo("Passwords Don't Match");
       setIsLoading(false);
       return;
     }
@@ -58,7 +63,26 @@ const Register = () => {
       setIsLoading(false);
       return;
     }
-    console.log({ enteredEmail, enteredPassword, enteredConPassword });
+    //console.log({ enteredEmail, enteredPassword, enteredConPassword });
+
+    createUserWithEmailAndPassword(auth, enteredEmail, enteredPassword)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+        setAuthInfo('Registration Successful. You Can Now Login')
+        setIsLoading(false);
+        // ...
+        emailInputRef.current.value ='';
+        passwordInputRef.current.value='';
+        conPasswordInputRef.current.value='';
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        setAuthInfo(errorMessage)
+        setIsLoading(false);
+        // ..
+      });
     setIsLoading(false);
   };
 
@@ -102,6 +126,7 @@ const Register = () => {
           </span>
         </form>
         {errorInfo && <ErrorModal error={errorInfo} />}
+        {authInfo && <AuthModal onAuth={authInfo} />}
       </Card>
 
       <div className={classes.image}>
