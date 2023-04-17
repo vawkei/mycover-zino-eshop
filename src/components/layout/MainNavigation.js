@@ -78,7 +78,7 @@ const MainNavigation = () => {
           </ul>
           <div className={classes["right-nav"]} onClick={hideNavMenu}>
             <span className={classes.links}>
-              <NavLink className={NavLinkHandler} to={"#"}>
+              <NavLink className={NavLinkHandler} to={'/login'}>
                 Login
               </NavLink>
               <a href="#">Hi Vawkei!</a>
