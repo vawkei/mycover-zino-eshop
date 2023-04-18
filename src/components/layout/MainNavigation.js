@@ -81,7 +81,7 @@ const MainNavigation = () => {
               <NavLink className={NavLinkHandler} to={'/login'}>
                 Login
               </NavLink>
-              <a href="#">Hi Vawkei!</a>
+              <a href="#">Hi </a>
               <NavLink className={NavLinkHandler} to={"/register"}>
                 Register
               </NavLink>
