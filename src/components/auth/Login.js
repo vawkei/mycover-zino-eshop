@@ -1,11 +1,10 @@
 import Button from "../ui/Button";
-// import classes from "./auth.module.css";
 import classes from "./auth.module.css";
 import registerImage from "../../asset/eshopregister.png";
 import Card from "../ui/Card";
 import { useState } from "react";
 import Loading from "../ui/Loading";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import React from "react";
 import {
   GoogleAuthProvider,
@@ -15,13 +14,16 @@ import {
 
 import { auth } from "../../firebase/Config";
 import { AiOutlineGoogle } from "react-icons/ai";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+
+
+
 
 const Login = () => {
   const [enteredEmail, setEnteredEmail] = useState("");
   const [enteredPassword, setEnteredPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const emailChangeHandler = (e) => {
     setEnteredEmail(e.target.value);
@@ -33,14 +35,15 @@ const Login = () => {
 
 const provider = new GoogleAuthProvider();  
 
-const onSignInGoogleHandler = (e) => {
-  e.preventDefault()
+const onSignInGoogleHandler = () => {
+  
   signInWithPopup(auth, provider)
   .then((result) => {
     // The signed-in user info.
     const user = result.user;
     toast.success('Login with Google Successfull')
     console.log(user);
+    navigate('/register')
   }).catch((error) => {
     // Handle Errors here.
     const errorMessage = error.message;
@@ -61,16 +64,16 @@ const onSignInGoogleHandler = (e) => {
     ) {
       toast.error("Please fill in the Inputs");
       setIsLoading(false);
-      return;
     }
     //console.log(enteredEmail, enteredPassword);
     signInWithEmailAndPassword(auth, enteredEmail, enteredPassword)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        //console.log(user);
-        toast("Log in Successfull");
+        console.log(user);
+        toast.success("Log in Successfull");
         setIsLoading(false);
+        navigate('/register')
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -82,7 +85,6 @@ const onSignInGoogleHandler = (e) => {
   return (
     <section>
       {isLoading && <Loading />}
-      <ToastContainer />
       <div className={classes.image}>
         <img src={registerImage} alt="reg-img" />
       </div>
@@ -128,10 +130,13 @@ const onSignInGoogleHandler = (e) => {
             <p>Register</p>
           </Link>
         </span>
-        <ToastContainer />
       </Card>
     </section>
   );
 };
 
 export default Login;
+
+
+
+

@@ -5,10 +5,13 @@ import RegisterPage from './pages/RegisterPage';
 import NotFound from './pages/NotFound';
 import {Routes,Route} from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-  return (    
+  return (     
   <Layout>
+    <ToastContainer />
     <Routes>
       <Route path='/' element={<HomePage />} />
       <Route path='/contact' element={<ContactPage/> } />

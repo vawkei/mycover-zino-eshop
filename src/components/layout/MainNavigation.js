@@ -14,7 +14,8 @@ import { toast } from "react-toastify";
 const MainNavigation = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [displayName, setDisplayName] = useState('');
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state)=>state.auth.isLoggedIn)
   const navigate = useNavigate()
 
   const toggleNavMenu = () => {
@@ -49,8 +50,6 @@ const MainNavigation = () => {
     </span>
   );
 
-
-
 const signOutHandler = ()=>{  
   signOut(auth).then(() => {
    // Sign-out successful.
@@ -60,9 +59,7 @@ const signOutHandler = ()=>{
     // An error happened.
     toast.error(error.message)
   });
-}
-
-let user = ''; 
+} 
 
 useEffect(()=>{
   // user = auth.currentUser;
@@ -71,25 +68,28 @@ useEffect(()=>{
 
       console.log(user)
       if(user.displayName === null){
-        const mail = user.email;
-        const mail0 = mail.split('@')
-        console.log(mail0)
-        const mail1 = mail0[0]
-        const mail2 = mail1.charAt(0).toUpperCase() + mail1.slice(1)
-        console.log(mail2);
-        setDisplayName(mail2)
+        const usersEmail = user.email;
+        const usersEmailArray = usersEmail.split('@')
+        console.log(usersEmailArray)
+        const userName = usersEmailArray[0]
+        const userNameUpper = userName.charAt(0).toUpperCase() + userName.slice(1)
+        console.log(userNameUpper);
+        setDisplayName(userNameUpper)
       }else{
         setDisplayName (user.displayName)
       };
   
       dispatch(authActions.createActiveUser({
-        
+        isLoggedIn:true ,
+        userName: user.displayName? user.displayName : displayName,
+        userId: user.uid
       }))
+    }else{
+      setDisplayName('')
+      dispatch(authActions.clearActiveUser())
     }
   })
-  
-      
-},[])
+},[dispatch,displayName])
 
 
   return (
@@ -130,17 +130,17 @@ useEffect(()=>{
           </ul>
           <div className={classes["right-nav"]} onClick={hideNavMenu}>
             <span className={classes.links}>
-              <NavLink className={NavLinkHandler} to={'/login'}>
+             {!isLoggedIn && <NavLink className={NavLinkHandler} to={'/login'}>
                 Login
-              </NavLink>
-              <a href="#" style={{color:'red'}}>Hi {displayName} </a>
-              <NavLink className={NavLinkHandler} to={"/register"}>
+              </NavLink> }
+              {isLoggedIn && <a href="#" style={{color:'red'}}>Hi {displayName} </a>}
+              {isLoggedIn && <NavLink className={NavLinkHandler} to={"/register"}>
                 Register
-              </NavLink>
-              <NavLink className={NavLinkHandler} to={"/orders"}>
+              </NavLink>}
+              {isLoggedIn &&<NavLink className={NavLinkHandler} to={"/orders"}>
                 My Orders
-              </NavLink>
-              <NavLink className={NavLinkHandler} onClick={signOutHandler} to={'/'}>Logout</NavLink>
+              </NavLink>}
+              {isLoggedIn && <NavLink className={NavLinkHandler} onClick={signOutHandler} to={'/'}>Logout</NavLink>}
             </span>
             {cart}
           </div>
